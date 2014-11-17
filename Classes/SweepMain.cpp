@@ -72,11 +72,16 @@ void SweepMain::creatSweepSprite()
 {
 	std::string clickNumber;
 	Size visibleSize = Director::getInstance()->getVisibleSize();
+	
+	CCSprite* backGroundPic = CCSprite::create("backgroundmain.png");
+	backGroundPic->setPosition(ccp(visibleSize.width/2,visibleSize.height/2));
+	this->addChild(backGroundPic);
+
 	for (int i=0;i<9;i++)
 		for (int j=0;j<9;j++)
 		{
 			sweep[i][j].sweepButton = CCSprite::create("sweep.png");
-			sweep[i][j].sweepButton->setPosition(ccp((visibleSize.width-180)/2+i*20,(visibleSize.height-180)/2+180-(j*20)));
+			sweep[i][j].sweepButton->setPosition(ccp(39+i*20,184-(j*20)));
 			this->addChild(sweep[i][j].sweepButton);
 		}
 }
