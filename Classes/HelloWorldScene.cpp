@@ -37,7 +37,7 @@ bool HelloWorld::init()
 	CCMenuItemImage* StartBottum = CCMenuItemImage::create("start1.png","start2.png","start1.png",this,menu_selector(HelloWorld::toGameStartScene));
 	StartBottum->setPosition(ccp(visibleSize.width/2,visibleSize.height/2));
 
-	CCMenuItemImage* ExitBottum = CCMenuItemImage::create("exit.png","exit.png","exit.png",this,menu_selector(HelloWorld::toExitGame));
+	CCMenuItemImage* ExitBottum = CCMenuItemImage::create("exit.png","exit_2.png","exit.png",this,menu_selector(HelloWorld::toExitGame));
 	ExitBottum->setPosition(ccp(visibleSize.width/2,visibleSize.height/2-60));
 
 	CCMenu *menu = CCMenu::create(StartBottum, ExitBottum,NULL);
@@ -58,7 +58,7 @@ void HelloWorld::toGameStartScene(Ref* _ref)
 
 void HelloWorld::toExitGame(Ref* _ref)
 {
-	return;
+	Director::getInstance()->end();
 }
 
 

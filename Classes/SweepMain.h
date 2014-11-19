@@ -16,6 +16,8 @@ public:
 	void getSpriteNumble(cocos2d::CCPoint touchPoint);
 	void getSweepNumber(int x,int y);
 	void toGameOver(bool winLose);
+	void updateTimeNumber(float t);
+	void updateSweepNumber(bool addOrDec);
     virtual bool init();
     
     CREATE_FUNC(SweepMain);

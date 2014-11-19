@@ -1,5 +1,6 @@
 #include "cocos2d.h"
 #include "GameOverScene.h"
+#include "HelloWorldScene.h"
 
 USING_NS_CC;
 
@@ -11,15 +12,35 @@ bool GameOverScene::init()
 	  }
 
 	  Size visibleSize = Director::getInstance()->getVisibleSize();
-	  CCSprite* winSprite = CCSprite::create("win.png");
-	  winSprite->setPosition(ccp(visibleSize.width/2,visibleSize.height/2));
-	  this->addChild(winSprite);
 
+	  CCMenuItemImage* endGameButtum = CCMenuItemImage::create("exit2.png","exit2.png","exit2.png",this,menu_selector(GameOverScene::endGame));
+	  endGameButtum->setPosition(ccp(visibleSize.width/2+50,visibleSize.height/2-60));
+
+	  CCMenuItemImage* restartGameButtum = CCMenuItemImage::create("restart.png","restart.png","restart.png",this,menu_selector(GameOverScene::restartGame));
+	  restartGameButtum->setPosition(ccp(visibleSize.width/2-50,visibleSize.height/2-60));
+
+	  CCMenu *Menu = CCMenu::create(endGameButtum,restartGameButtum,NULL);
+	  Menu->setPosition(ccp(0,0));
+	  this->addChild(Menu);
+
+	  CCSprite* winSprite = CCSprite::create("win.png");
+	  winSprite->setPosition(ccp(visibleSize.width/2,visibleSize.height/2+70));
+	  this->addChild(winSprite);
+}
+
+void GameOverScene::endGame(Ref* _ref)
+{
+	Director::getInstance()->end();
+}
+
+void GameOverScene::restartGame(Ref* _ref)
+{
+	auto reScene = CCTransitionFade::create(1,HelloWorld::createScene());
+	CCDirector::sharedDirector()->replaceScene(reScene);
 }
 
 CCScene* GameOverScene::gameScene()
 {
-	CCLOG("333");
 
 	CCScene* playScene = CCScene::create();
 	GameOverScene* layer = GameOverScene::create();

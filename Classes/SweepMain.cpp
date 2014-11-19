@@ -5,12 +5,15 @@
 #include "time.h"
 #include "string.h"
 #include "ctime"
+#include "sstream"
 
 USING_NS_CC;
 
 Sweep sweep[9][9];
 int clickNumber;
 clock_t touchTime;
+CCLabelTTF* timeText,*sweepText;
+int timeNumber,leftSweepNumber;
 
 bool SweepMain::init()
 {
@@ -25,6 +28,15 @@ bool SweepMain::init()
 	  creatSweepSprite(); //图像信息生成
 	  this->setTouchEnabled(true);
 	  sweepTouchCreate();//生成按钮
+	  
+	  timeText = CCLabelTTF::create("0","Felt",30);
+	  timeText->setPosition(ccp(238-57,283-48));
+	  this->addChild(timeText);
+	  sweepText = CCLabelTTF::create("10","Felt",30);
+	  sweepText->setPosition(ccp(57,283-48));
+	  this->addChild(sweepText);
+	  timeNumber = 0;leftSweepNumber = 10; 
+	  schedule(schedule_selector(SweepMain::updateTimeNumber), 1); //读秒
 
 }
 
@@ -182,6 +194,8 @@ void Sweep::clickSweepButton()
 		if (sweep[this->Xpoint][this->Ypoint].sweepNumber == 6)	sweep[this->Xpoint][this->Ypoint].sweepButton->setTexture("sweep6.png");
 		if (sweep[this->Xpoint][this->Ypoint].sweepNumber == 7)	sweep[this->Xpoint][this->Ypoint].sweepButton->setTexture("sweep7.png");
 		if (sweep[this->Xpoint][this->Ypoint].sweepNumber == 8)	sweep[this->Xpoint][this->Ypoint].sweepButton->setTexture("sweep8.png");
+
+		if (sweep[this->Xpoint][this->Ypoint].sweepButton->getTag() == 1015) updateSweepNumber(true);
 		
 		if ((this->sweepNumber == 10)&&(this->sweepClick)) {
 			sweep[this->Xpoint][this->Ypoint].sweepButton->setTexture("sweep10.png");
@@ -212,7 +226,9 @@ void Sweep::markSweepButton()
 {
 
 	sweep[this->Xpoint][this->Ypoint].sweepButton->setTexture("sweep_mark.png");
+	sweep[this->Xpoint][this->Ypoint].sweepButton->setTag(1015);
 	this->markClick = true;
+	updateSweepNumber(false);
 
 }
 
@@ -232,8 +248,26 @@ void SweepMain::toGameOver(bool winLose)
 	}
 }
 
+void SweepMain::updateTimeNumber(float t)
+{
+	timeNumber++;
+	std::stringstream ss;
+	std::string timeString;
+	ss<<timeNumber;ss>>timeString;
+	timeText->setString(timeString);
 
+}
 
+void SweepMain::updateSweepNumber(bool addOrDec)
+{
+	if (addOrDec) leftSweepNumber++; else leftSweepNumber--;
+
+	std::stringstream ss;
+	std::string sweepString;
+	ss<<leftSweepNumber;ss>>sweepString;
+	sweepText->setString(sweepString);
+
+}
 
 CCScene* SweepMain::gameScene()
 {
