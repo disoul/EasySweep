@@ -7,6 +7,8 @@ public:
 	static cocos2d::CCScene* gameScene();
 	void endGame(Ref* _ref);
 	void restartGame(Ref* _ref);
+	void printSweepGrade();
+	int gameTime;
 
 	CREATE_FUNC(GameOverScene);
 

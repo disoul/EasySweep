@@ -1,6 +1,9 @@
 #include "cocos2d.h"
 #include "GameOverScene.h"
 #include "HelloWorldScene.h"
+#include "sstream"
+#include "fstream"
+#include "string.h"
 
 USING_NS_CC;
 
@@ -26,6 +29,8 @@ bool GameOverScene::init()
 	  CCSprite* winSprite = CCSprite::create("win.png");
 	  winSprite->setPosition(ccp(visibleSize.width/2,visibleSize.height/2+70));
 	  this->addChild(winSprite);
+
+	  printSweepGrade();
 }
 
 void GameOverScene::endGame(Ref* _ref)
@@ -37,6 +42,28 @@ void GameOverScene::restartGame(Ref* _ref)
 {
 	auto reScene = CCTransitionFade::create(1,HelloWorld::createScene());
 	CCDirector::sharedDirector()->replaceScene(reScene);
+}
+
+void GameOverScene::printSweepGrade()
+{
+
+	  Size visibleSize = Director::getInstance()->getVisibleSize();
+#if 0
+	  std::ifstream getTime;
+	  getTime.open("sweepdata.sweep");
+	  getTime>>gameTime;
+	  getTime.close();
+
+
+	  std::stringstream ss;
+	  std::string timeString;
+	  ss<<gameTime;ss>>timeString;
+	  timeString = "Time:" + timeString + "s";
+#endif
+	  CCLabelTTF* winTimeTTF = CCLabelTTF::create("test","Felt",15);
+	  winTimeTTF->setPosition(ccp(visibleSize.width/2,visibleSize.height/2));
+	  this->addChild(winTimeTTF);
+
 }
 
 CCScene* GameOverScene::gameScene()

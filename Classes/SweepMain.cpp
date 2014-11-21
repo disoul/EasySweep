@@ -6,6 +6,7 @@
 #include "string.h"
 #include "ctime"
 #include "sstream"
+#include "fstream"
 
 USING_NS_CC;
 
@@ -14,6 +15,8 @@ int clickNumber;
 clock_t touchTime;
 CCLabelTTF* timeText,*sweepText;
 int timeNumber,leftSweepNumber;
+std::ifstream inputSweep;
+std::ofstream outSweep;
 
 bool SweepMain::init()
 {
@@ -234,15 +237,31 @@ void Sweep::markSweepButton()
 
 void SweepMain::toGameOver(bool winLose)
 {
+	int winTimes,winNumbers,loseNumbers;
+	inputSweep.open("sweepdata.sweep");
+	inputSweep>>winTimes;inputSweep>>winNumbers;inputSweep>>loseNumbers;
+	winTimes = timeNumber;
 	if (winLose)
 	{
+		CCLOG("win");
+		winNumbers++;
+		inputSweep.close();
+		outSweep.open("sweepdata.sweep");
+		outSweep<<winTimes<<' '<<winNumbers<<' '<<loseNumbers<<'\n';
+		outSweep.close();
+		CCLOG("win2");
 		auto reScene = CCTransitionCrossFade::create(1,GameOverScene::gameScene());
 		CCDirector::sharedDirector()->replaceScene(reScene);
        
-		CCLOG("win");
+		CCLOG("win3");
 	}
 	else
 	{
+		loseNumbers++;
+		inputSweep.close();
+		outSweep.open("sweepdata.sweep");
+		outSweep<<winTimes<<' '<<winNumbers<<' '<<loseNumbers<<"\n";
+		outSweep.close();
 		auto reScene = CCTransitionFade::create(1,HelloWorld::createScene());
 		CCDirector::sharedDirector()->replaceScene(reScene);
 	}

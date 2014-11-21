@@ -1,5 +1,6 @@
  #include "HelloWorldScene.h"
  #include "SweepMain.h"
+ #include "GameOverScene.h"
 
 USING_NS_CC;
 
@@ -51,7 +52,7 @@ void HelloWorld::toGameStartScene(Ref* _ref)
 {
 	CCLOG("111");
 	//CCScene* sceneChange = SweepMain::gameScene(); 
-	auto reScene = CCTransitionCrossFade::create(1,SweepMain::gameScene());
+	auto reScene = CCTransitionCrossFade::create(1,GameOverScene::gameScene());
 	CCDirector::sharedDirector()->replaceScene(reScene);
 	CCLOG("222");
 }
