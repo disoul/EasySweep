@@ -18,7 +18,6 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto glview = director->getOpenGLView();
     if(!glview) {
         glview = GLView::create("Sweep");
-		glview->setFrameSize(238,283);
         director->setOpenGLView(glview);
     }
 

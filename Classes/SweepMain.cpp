@@ -24,19 +24,19 @@ bool SweepMain::init()
      {
 			return false;
      }
-	  //sweepSurplusTTF = CCLabelTTF::create();//剩余雷数显示
 
 	  clickNumber = 0;
 	  creatSweepMap(); //数字信息生成
 	  creatSweepSprite(); //图像信息生成
 	  this->setTouchEnabled(true);
 	  sweepTouchCreate();//生成按钮
-	  
+
+	  Size visibleSize = Director::getInstance()->getVisibleSize();
 	  timeText = CCLabelTTF::create("0","Felt",30);
-	  timeText->setPosition(ccp(238-57,283-48));
+	  timeText->setPosition(ccp((visibleSize.width-238)/2+238-57,(visibleSize.height-283)/2+283-48));
 	  this->addChild(timeText);
 	  sweepText = CCLabelTTF::create("10","Felt",30);
-	  sweepText->setPosition(ccp(57,283-48));
+	  sweepText->setPosition(ccp((visibleSize.width-238)/2+57,(visibleSize.height-283)/2+283-48));
 	  this->addChild(sweepText);
 	  timeNumber = 0;leftSweepNumber = 10; 
 	  schedule(schedule_selector(SweepMain::updateTimeNumber), 1); //读秒
@@ -96,7 +96,7 @@ void SweepMain::creatSweepSprite()
 		for (int j=0;j<9;j++)
 		{
 			sweep[i][j].sweepButton = CCSprite::create("sweep.png");
-			sweep[i][j].sweepButton->setPosition(ccp(39+i*20,184-(j*20)));
+			sweep[i][j].sweepButton->setPosition(ccp(visibleSize.width/2-(238/2-39)+i*20,(visibleSize.height-283)/2+184-(j*20)));
 			this->addChild(sweep[i][j].sweepButton);
 		}
 }

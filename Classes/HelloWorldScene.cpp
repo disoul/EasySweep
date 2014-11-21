@@ -52,7 +52,7 @@ void HelloWorld::toGameStartScene(Ref* _ref)
 {
 	CCLOG("111");
 	//CCScene* sceneChange = SweepMain::gameScene(); 
-	auto reScene = CCTransitionCrossFade::create(1,GameOverScene::gameScene());
+	auto reScene = CCTransitionCrossFade::create(1,SweepMain::gameScene());
 	CCDirector::sharedDirector()->replaceScene(reScene);
 	CCLOG("222");
 }
