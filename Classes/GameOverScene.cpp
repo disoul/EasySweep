@@ -31,6 +31,7 @@ bool GameOverScene::init()
 	  this->addChild(winSprite);
 
 	  printSweepGrade();
+	  return true;
 }
 
 void GameOverScene::endGame(Ref* _ref)
@@ -60,7 +61,7 @@ void GameOverScene::printSweepGrade()
 	  ss<<gameTime;ss>>timeString;
 	  timeString = "Time:" + timeString + "s";
 #endif
-	  CCLabelTTF* winTimeTTF = CCLabelTTF::create("test","Felt",15);
+	  CCLabelTTF* winTimeTTF = CCLabelTTF::create("test","fonts/Marker Felt.ttf",15);
 	  winTimeTTF->setPosition(ccp(visibleSize.width/2,visibleSize.height/2));
 	  this->addChild(winTimeTTF);
 

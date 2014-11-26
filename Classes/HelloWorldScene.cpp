@@ -26,10 +26,11 @@ bool HelloWorld::init()
     // 1. super init first
     if ( !Layer::init() )
     {
+    	CCLOG("ASAS");
         return false;
     }
     
-
+    CCLOG("DSAD");
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	CCSprite* BackGoundPicture = CCSprite::create("background.png");
 	BackGoundPicture->setPosition(ccp(visibleSize.width/2,visibleSize.height/2));
@@ -51,7 +52,7 @@ bool HelloWorld::init()
 void HelloWorld::toGameStartScene(Ref* _ref)
 {
 	CCLOG("111");
-	//CCScene* sceneChange = SweepMain::gameScene(); 
+	CCScene* sceneChange = SweepMain::gameScene();
 	auto reScene = CCTransitionCrossFade::create(1,SweepMain::gameScene());
 	CCDirector::sharedDirector()->replaceScene(reScene);
 	CCLOG("222");

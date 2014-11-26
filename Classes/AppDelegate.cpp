@@ -1,6 +1,6 @@
 #include "AppDelegate.h"
 #include "HelloWorldScene.h"
-#include "SweepMain.h"
+
 
 USING_NS_CC;
 
@@ -18,6 +18,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto glview = director->getOpenGLView();
     if(!glview) {
         glview = GLView::create("Sweep");
+        CCLOG("ASDAAS");
         director->setOpenGLView(glview);
     }
 

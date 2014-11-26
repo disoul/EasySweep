@@ -19,6 +19,7 @@ public:
 	void updateTimeNumber(float t);
 	void updateSweepNumber(bool addOrDec);
     virtual bool init();
+	Sweep sweep[9][9];
     
     CREATE_FUNC(SweepMain);
 };
@@ -26,6 +27,15 @@ public:
 class Sweep : public SweepMain
 {
 public:
+	Sweep()
+	{
+		sweepNumber = 0;
+		Xpoint = 0;
+		Ypoint = 0;
+		isClick = false;
+		sweepClick = false;
+		markClick = false;
+	};
 	int sweepNumber,Xpoint,Ypoint;
 	cocos2d::CCSprite* sweepButton;
 	void clickSweepButton();
@@ -34,3 +44,5 @@ public:
 	bool sweepClick;//防止递归时触发雷区
 	bool markClick;//防止触发标记
 };
+
+
