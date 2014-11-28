@@ -16,7 +16,9 @@ CCLabelTTF* timeText,*sweepText;
 int timeNumber,leftSweepNumber;
 std::ifstream inputSweep;
 std::ofstream outSweep;
-//Sweep sweep[9][9];
+Sweep sweep[9][9];
+
+
 
 bool SweepMain::init()
 {
@@ -24,7 +26,7 @@ bool SweepMain::init()
      {
 			return false;
      }
-#if 0
+
 	  clickNumber = 0;
 	  creatSweepMap(); //数字信息生成
 	  creatSweepSprite(); //图像信息生成
@@ -41,12 +43,12 @@ bool SweepMain::init()
 	  sweepText->setPosition(ccp((visibleSize.width-238)/2+57,(visibleSize.height-283)/2+283-48));
 	  this->addChild(sweepText);
 	  timeNumber = 0;leftSweepNumber = 10; 
-	  //schedule(schedule_selector(SweepMain::updateTimeNumber), 1); //读秒
-#endif
+	  schedule(schedule_selector(SweepMain::updateTimeNumber), 1); //读秒
+
 	  return true;
 }
 
-#if 0
+
 void SweepMain::creatSweepMap()
 {
 	int numSweep = 0;
@@ -201,7 +203,9 @@ void Sweep::clickSweepButton()
 		if (sweep[this->Xpoint][this->Ypoint].sweepNumber == 7)	sweep[this->Xpoint][this->Ypoint].sweepButton->setTexture("sweep7.png");
 		if (sweep[this->Xpoint][this->Ypoint].sweepNumber == 8)	sweep[this->Xpoint][this->Ypoint].sweepButton->setTexture("sweep8.png");
 
-		if (sweep[this->Xpoint][this->Ypoint].sweepButton->getTag() == 1015) updateSweepNumber(true);
+		if (sweep[this->Xpoint][this->Ypoint].sweepButton->getTag() == 1015){
+			updateSweepNumber(true);
+		}
 		
 		if ((this->sweepNumber == 10)&&(this->sweepClick)) {
 			sweep[this->Xpoint][this->Ypoint].sweepButton->setTexture("sweep10.png");
@@ -237,7 +241,7 @@ void Sweep::markSweepButton()
 
 }
 
-void SweepMain::toGameOver(bool winLose)
+void Sweep::toGameOver(bool winLose)
 {
 	int winTimes,winNumbers,loseNumbers;
 	inputSweep.open("sweepdata.sweep");
@@ -280,7 +284,7 @@ void SweepMain::updateTimeNumber(float t)
 
 }
 
-void SweepMain::updateSweepNumber(bool addOrDec)
+void Sweep::updateSweepNumber(bool addOrDec)
 {
 	if (addOrDec) leftSweepNumber++; else leftSweepNumber--;
 
@@ -292,7 +296,7 @@ void SweepMain::updateSweepNumber(bool addOrDec)
 }
 
 
-#endif
+
 
 CCScene* SweepMain::gameScene()
 {

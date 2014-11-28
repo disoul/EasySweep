@@ -19,9 +19,10 @@ bool AppDelegate::applicationDidFinishLaunching() {
     if(!glview) {
         glview = GLView::create("Sweep");
         CCLOG("ASDAAS");
-        director->setOpenGLView(glview);
-    }
+		director->setOpenGLView(glview);
+	}
 
+    glview->setDesignResolutionSize(238, 283, kResolutionShowAll);
     // turn on display FPS
 	director->setDisplayStats(false);
 

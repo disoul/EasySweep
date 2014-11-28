@@ -15,16 +15,14 @@ public:
 	void sweepUpdate(float t);
 	void getSpriteNumble(cocos2d::CCPoint touchPoint);
 	void getSweepNumber(int x,int y);
-	void toGameOver(bool winLose);
 	void updateTimeNumber(float t);
-	void updateSweepNumber(bool addOrDec);
+	//void updateSweepNumber(bool addOrDec);
     virtual bool init();
-	Sweep sweep[9][9];
     
     CREATE_FUNC(SweepMain);
 };
 
-class Sweep : public SweepMain
+class Sweep
 {
 public:
 	Sweep()
@@ -43,6 +41,8 @@ public:
 	bool isClick;//防止重复点击
 	bool sweepClick;//防止递归时触发雷区
 	bool markClick;//防止触发标记
+	void updateSweepNumber(bool addOrDec);
+	void toGameOver(bool winLose);
 };
 
 
