@@ -38,6 +38,7 @@ public:
 	cocos2d::CCSprite* sweepButton;
 	void clickSweepButton();
 	void markSweepButton();
+	void cleanClickButton();
 	bool isClick;//防止重复点击
 	bool sweepClick;//防止递归时触发雷区
 	bool markClick;//防止触发标记

@@ -102,6 +102,7 @@ void SweepMain::creatSweepSprite()
 		{
 			sweep[i][j].sweepButton = CCSprite::create("sweep.png");
 			sweep[i][j].sweepButton->setPosition(ccp(visibleSize.width/2-(238/2-39)+i*20,(visibleSize.height-283)/2+184-(j*20)));
+			sweep[i][j].sweepButton->setTag(0214);
 			this->addChild(sweep[i][j].sweepButton);
 		}
 }
@@ -140,6 +141,7 @@ void SweepMain::sweepTouchCreate()
 					if((rc1.containsPoint(touchPoint))&&(!sweep[i][j].isClick))
 					{
 						sweep[i][j].sweepButton->setTexture("sweep0.png");
+						sweep[i][j].sweepButton->setTag(1127);
 					}
 			 }
          return true;
@@ -157,7 +159,9 @@ void SweepMain::sweepTouchCreate()
 
 					if((rc1.containsPoint(touchPoint))&&(!sweep[i][j].isClick))
 					{
+						sweep[i][j].cleanClickButton();
 						sweep[i][j].sweepButton->setTexture("sweep0.png");
+						sweep[i][j].sweepButton->setTag(1127);
 					}
 			 }
 
@@ -179,6 +183,7 @@ void SweepMain::sweepTouchCreate()
 							sweep[i][j].markSweepButton();
 						else
 						{
+							sweep[i][j].sweepButton->setTag(1128);
 							sweep[i][j].sweepClick = true;
 							sweep[i][j].clickSweepButton();
 						}
@@ -271,6 +276,19 @@ void Sweep::toGameOver(bool winLose)
 		auto reScene = CCTransitionFade::create(1,HelloWorld::createScene());
 		CCDirector::sharedDirector()->replaceScene(reScene);
 	}
+}
+
+void Sweep::cleanClickButton()
+{
+	for (int i=0;i<9;i++)
+		for (int j=0;j<9;j++)
+		{
+			if (sweep[i][j].sweepButton->getTag() == 1127)
+			{
+				sweep[i][j].sweepButton->setTexture("sweep.png");
+				sweep[i][j].sweepButton->setTag(0214);
+			}
+		}
 }
 
 void SweepMain::updateTimeNumber(float t)
